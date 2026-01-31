@@ -22,7 +22,7 @@ int sumOfArr(int arr[],int idx){
     return arr[idx] + sumOfArr(arr,idx-1);
 }
 int main(){
-
+    int k=0;
     int arr[10] = {1,2,3,4,5,6,7,8,9,10};
     cout<<isArrSorted(arr,10);
 
@@ -31,4 +31,5 @@ int main(){
     bool isFound = false;
     findEle(arr,9,k,isFound);
     cout<<isFound;
+    cout<<"HI"<<endl;
 }
