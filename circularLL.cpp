@@ -15,6 +15,26 @@ class Node{
     }
 };
 
+void deleteAtBeginCLL(Node* &head){
+    if(head == nullptr) return;
+
+    if(head->next == head){
+        Node* del = head;
+        head = nullptr;
+        delete del;
+        return;
+    }
+    Node* temp = head;
+    while(temp->next != head){
+        temp = temp->next;
+    }
+
+    Node* del = head;
+    temp->next = head->next;
+    head = del->next;
+    delete del;
+}
+
 void insertNodeAtHeadCLL(Node* &head,int val){
     Node* n = new Node(val);
     if(head == nullptr){
@@ -36,7 +56,10 @@ void insertNodeAtHeadCLL(Node* &head,int val){
 
 void printCLL(Node* head){
     Node* temp = head;
-
+    if(head == nullptr){
+        cout<<"LIST IS EMPTY";
+        return;
+    }
     do{
         cout<<temp->data<<" ";
         temp = temp->next;
@@ -63,6 +86,23 @@ void insertNodeCLL(Node* &head,int val){
 
 }
 
+void deleteLastNodeCLL(Node* &head){
+    if(head == nullptr) return;
+    if(head->next == head) {
+        delete head;
+        head = nullptr;
+        return;
+    }
+    Node* temp = head;
+
+    while(temp->next->next != head){
+        temp = temp->next;
+    }
+
+    Node* del = temp->next;
+    temp->next = del->next;
+    delete del;
+}
 
 int main(){
     int n;
@@ -81,9 +121,15 @@ int main(){
     for(int i=0;i<n;i++){
         insertNodeCLL(head,arr[i]);
     }
-
+    cout<<endl<<"AFTER INSERTION"<<endl;
     printCLL(head);
 
+    deleteLastNodeCLL(head);
+    cout<<endl<<"AFTER DELETION OF LAST NODE"<<endl;
+    printCLL(head);
 
+    deleteAtBeginCLL(head);
+    cout<<endl<<"AFTER DELETION OF Head NODE"<<endl;
+    printCLL(head);
 
 }
