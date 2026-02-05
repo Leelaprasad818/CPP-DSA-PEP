@@ -3,6 +3,268 @@
 using namespace std;
 
 
+/**
+https://leetcode.com/problems/partition-list/description/?envType=problem-list-v2&envId=linked-list
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ 
+class Solution {
+public:
+    ListNode* partition(ListNode* head, int x) {
+        if(head == nullptr || head->next == nullptr) return head;
+
+        ListNode* dummyR = new ListNode(0);
+        ListNode* dummyL = new ListNode(0);
+        ListNode* right = dummyR;
+        ListNode* left = dummyL;
+
+        ListNode* temp = head;
+
+        while(temp != nullptr){
+            ListNode* nxt = temp->next;
+            temp->next = nullptr;
+            if(temp->val < x){
+                left->next = temp;
+                left = left->next;
+            }
+            else{
+                right->next = temp;
+                right = right->next;
+            }
+            temp = nxt;
+        }
+        left->next = dummyR->next;
+        return dummyL->next;
+    }
+};
+*/
+
+
+/**
+https://leetcode.com/problems/intersection-of-two-linked-lists/
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ 
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        if(!headA || !headB) return nullptr;
+
+        ListNode* temp1 = headA;
+        ListNode* temp2 = headB;
+        
+        while(temp1 != temp2){
+            temp1 = (temp1 == nullptr) ? headB : temp1->next;
+            temp2 = (temp2 == nullptr) ? headA : temp2->next;
+        }
+
+        return temp1;
+    }
+};
+*/
+
+/**
+https://leetcode.com/problems/linked-list-cycle-ii/
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        ListNode* slow = head;
+        ListNode* fast = head;
+
+        while(fast && fast->next){
+            slow = slow->next;
+            fast = fast->next->next;
+
+            if(slow==fast){
+                slow = head;
+                while(slow!=fast){
+                    slow = slow->next;
+                    fast = fast->next;
+                }
+                return slow;
+            }
+        }
+        return nullptr;
+    }
+};
+*/
+
+
+/**
+https://leetcode.com/problems/linked-list-cycle/
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        ListNode* slow = head;
+        ListNode* fast = head;
+
+        while(fast && fast->next){
+            slow = slow->next;
+            fast = fast->next->next;
+
+            if(slow == fast) return true;
+        }
+
+        return false;
+    }
+};
+*/
+
+/**
+https://leetcode.com/problems/palindrome-linked-list/
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+
+class Solution {
+public:
+    void reverse(ListNode* &head){
+        ListNode* temp = head;
+        ListNode* prev = nullptr;
+
+        while(temp != nullptr){
+            ListNode* nxt = temp->next;
+            temp->next = prev;
+            prev = temp;
+            temp = nxt;
+        }
+
+        head = prev;
+    }
+
+    bool isPalindrome(ListNode* head) {
+        ListNode* first = head;
+        ListNode* second = head;
+        ListNode* temp = head;
+        while(second!=nullptr && second->next != nullptr){
+            first = first->next;
+            second = second->next->next;
+        }
+
+        reverse(first);
+
+        while(first != nullptr){
+            if(temp->val != first->val){
+                return false;
+            }
+            temp = temp->next;
+            first = first->next;
+        }
+
+        return true;
+
+    }
+};
+*/
+
+/**
+https://leetcode.com/problems/remove-duplicates-from-sorted-list/
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ 
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head){
+        if(head == nullptr) return head;
+        if(head->next == nullptr) return head;
+        ListNode* temp = head;
+        while(head->next != nullptr){
+            if(head->val == head->next->val){
+                ListNode* n = head->next;
+                head->next = n->next;
+                delete n;
+            }else{
+            head = head->next;
+            }
+        }
+        return temp;
+    }
+};
+
+
+
+
+/*
+https://www.geeksforgeeks.org/problems/insert-in-a-sorted-list/1
+structure of the node of the list is as
+struct Node
+{
+    int data;
+    struct Node* next;
+
+    Node(int x){
+        data = x;
+        next = NULL;
+    }
+};
+
+
+class Solution {
+  public:
+    // Should return head of the modified linked list
+    Node* sortedInsert(Node* head, int key) {
+        // Code here
+        Node* temp = head;
+        Node* n = new Node(key);
+        if(head->data > n->data){
+            n->next = head;
+            head = n;
+            return head;
+        }
+        
+        while(temp->next != nullptr){
+            if(temp->next->data >= n->data){
+                n->next = temp->next;
+                temp->next = n;
+                return head;
+            }
+            temp = temp->next;
+        }
+        if(temp->data <= n->data && temp->next == nullptr){
+            temp->next = n;
+        }
+        
+        return head;
+    }
+};
+
+
+*/
+
 class Node{
     public:
     int data;
