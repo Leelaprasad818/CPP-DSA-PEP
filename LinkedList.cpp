@@ -3,6 +3,61 @@
 using namespace std;
 
 
+
+
+
+
+/* Node is defined as
+https://www.geeksforgeeks.org/problems/given-a-linked-list-of-0s-1s-and-2s-sort-it/1
+  class Node {
+  public:
+    int data;
+    Node* next;
+
+    Node(int x) {
+        data = x;
+        next = nullptr;
+    }
+};
+class Solution {
+  public:
+    Node* segregate(Node* head) {
+        // code here
+        Node* temp = head;
+        Node* zeros = new Node(0);
+        Node* ones = new Node(0);
+        Node* twos = new Node(0);
+        
+        Node* z = zeros;
+        Node* o = ones;
+        Node* t = twos;
+        
+        
+        while(temp != nullptr){
+            if(temp->data == 0){
+                z->next = temp;
+                z = z->next;
+            }else if(temp->data == 1){
+                o->next = temp;
+                o = o->next;
+            }else{
+                t->next = temp;
+                t = t->next;
+            }
+            temp = temp->next;
+        }
+        
+        z->next = ones->next;
+        o->next = twos->next;
+        
+        return zeros->next;
+        
+    }
+};
+*/
+
+
+
 /**
 https://leetcode.com/problems/partition-list/description/?envType=problem-list-v2&envId=linked-list
  * Definition for singly-linked list.
