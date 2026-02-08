@@ -6,7 +6,7 @@ void printArray(vector<int> &arr, int n){
     for(int i = 0; i < n; i++) cout << arr[i] << " ";
     cout << endl;
 }
-
+//bubblesort
 void bubbleSort(vector<int> &arr, int n){
     for(int i = 0; i < n - 1; i++){
         cout << "Pass " << i + 1 << endl;
@@ -138,6 +138,7 @@ bool isSorted(vector<int> arr, int n){
 }
 
 int main(){
+    cout<<"THIS IS CODE FOR SORTING ALGOS OF DIFF METHODS"<<endl;
     int n;
     cout << "Enter len of arr : ";
     cin >> n;
