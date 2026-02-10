@@ -2,10 +2,120 @@
 
 using namespace std;
 
+/*
+https://leetcode.com/problems/copy-list-with-random-pointer/
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    Node* next;
+    Node* random;
+    
+    Node(int _val) {
+        val = _val;
+        next = NULL;
+        random = NULL;
+    }
+};
+
+class Solution {
+public:
+    Node* copyRandomList(Node* head) {
+        Node* curr = head;
+        while(curr != nullptr){
+            Node* dummy = new Node(curr->val);
+            dummy->next = curr->next;
+            curr->next = dummy;
+
+            curr = dummy->next;
+        }
+
+        curr = head;
+        while(curr != nullptr){
+            if(curr->random != nullptr) curr->next->random = curr->random->next;
+            curr = curr->next->next;
+        }
+
+        Node* dummy = new Node(0);
+        Node* tail = dummy;
+
+        curr = head;
+
+        while(curr != nullptr){
+            Node* copy = curr->next;
+            curr->next = copy->next;
+            tail->next = copy;
+            tail = tail->next;
+            curr = curr->next;
+        }
+
+        return dummy->next;
+    }
+};
+*/
 
 
+/**
+https://leetcode.com/problems/sort-list/
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ 
+class Solution {
+public:
+    ListNode* findMid(ListNode* head){
+        if(head==nullptr || head->next == nullptr) return head;
+        ListNode* slow = head;
+        ListNode* fast = head->next;
 
+        while(fast && fast->next){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
 
+        return slow;
+    }
+    ListNode* mergeSort(ListNode* left,ListNode* right){
+        ListNode dummy(0);
+        ListNode* tail = &dummy;
+
+        while(left != nullptr && right != nullptr){
+            if(left->val <=right->val){
+                tail->next = left;
+                left = left->next;
+            }else{
+                tail->next = right;
+                right = right->next;
+            }
+            tail = tail->next;
+        }
+
+        if(left != nullptr) tail->next = left;
+        if(right != nullptr) tail->next = right;
+
+        return dummy.next;
+    }
+    ListNode* sortList(ListNode* head) {
+        if(head == nullptr || head->next == nullptr) return head;
+        ListNode* temp = head;
+
+        ListNode* mid = findMid(head);
+        ListNode* right = mid->next;
+        ListNode* left = head;
+        mid->next = nullptr;
+
+        ListNode* sortedLeft = sortList(left);
+        ListNode* sortedRight = sortList(right);
+        return mergeSort(sortedLeft,sortedRight);
+    }
+};
+
+*/
 
 /* Node is defined as
 https://www.geeksforgeeks.org/problems/given-a-linked-list-of-0s-1s-and-2s-sort-it/1
