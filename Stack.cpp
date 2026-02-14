@@ -49,6 +49,74 @@ vector<int> nextGreaterElement(vector<int>&arr){
 
 
 /*
+https://www.geeksforgeeks.org/problems/the-celebrity-problem/1
+class Solution {
+  public:
+    int celebrity(vector<vector<int>>& mat) {
+        // code here
+        stack<int> st;
+        int n = mat.size();
+        int m = mat[0].size();
+        //push all persons in stack;
+        for(int i=0;i<n;i++){
+            st.push(i);
+        }
+        
+        
+        // find a potential celeb;
+        while(st.size() > 1){
+            int a = st.top();
+            st.pop();
+            
+            
+            int b = st.top();
+            st.pop();
+            // if a knows b then a cannot be a celeb
+            if(mat[a][b] == 1) st.push(b);
+            else st.push(a);
+        }
+        
+        int pot = st.top();
+        for(int i=0;i<n;i++){
+            if(i==pot) continue;
+            if(mat[pot][i] == 1) return -1;
+            if(mat[i][pot] == 0) return -1;
+        }
+        return pot;    
+    }
+};
+*/
+
+/*
+https://leetcode.com/problems/online-stock-span/
+class StockSpanner {
+public:
+    stack<pair<int,int>> st;
+
+    StockSpanner() {
+        
+    }
+    
+    int next(int price) {
+        int curr = 1;
+        while(!st.empty() && st.top().first <= price){
+            curr += st.top().second;
+            st.pop();
+        }
+
+        st.push({price,curr});
+        return curr;
+    }
+};
+
+/**
+ * Your StockSpanner object will be instantiated and called as such:
+ * StockSpanner* obj = new StockSpanner();
+ * int param_1 = obj->next(price);
+ */
+*/
+
+/*
 https://leetcode.com/problems/next-greater-element-i/
 class Solution {
 public:
