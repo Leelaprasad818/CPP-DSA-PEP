@@ -46,6 +46,51 @@ vector<int> nextGreaterElement(vector<int>&arr){
     }
     return nge;
 }
+//https://leetcode.com/problems/asteroid-collision/
+/*
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& a) {
+        stack<int> st;
+
+        int n = a.size();
+
+        for(int i : a){
+            bool dis = false;
+            while(){
+                int topV = st.top();
+
+                if(abs(topV) <abs(curr)){
+                    st.top();
+                
+                }
+                else if(abs(topV))
+            }
+        }
+
+        /*
+        vector<int> res;
+        int n = a.size();
+        int i=0;
+        int j=1;
+
+        int start = 0;
+
+        int count = 0;
+        while(j<n){
+            if((a[i] > 0 && a[j] > 0)||(a[i] < 0 && a[j] < 0)){
+                res.push_back(a[i]);
+                j++;
+            }else if(a[i] > 0 && a[j] < 0 ){
+                if(a[i] > abs(a[j])){
+                    
+                }
+            }
+        }
+        
+    }
+};
+*/
 
 
 /*
