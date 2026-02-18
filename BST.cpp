@@ -13,6 +13,83 @@ A binary search tree is a special type of tree where
 */
 
 
+/*
+https://leetcode.com/problems/delete-node-in-a-bst/
+ //step1 : find the node to be deleted by comparisions 
+ //step2:restructive its children while preserving BST order
+
+ //there can be 3 cases for deleting a node
+ //1.no children (leaf node ) this can be deleted directly 
+ //2.one child - can replace the current node with its only child
+ //3.two child - to maintain BST order, we need either 
+class Solution {
+public:
+    TreeNode* minEle(TreeNode* node){
+        while(node->left != nullptr){
+            node = node->left;
+        }
+        return node;
+    }
+    TreeNode* deleteNode(TreeNode* root, int key) {
+        if(!root) return root;
+
+        if(key < root->val){
+            root->left = deleteNode(root->left,key);
+        }else if(key > root->val){
+            root->right = deleteNode(root->right,key);
+        }else{
+            //case 1 : node has no left child
+            //replace node with its right child
+            if(root->left == nullptr){
+                TreeNode* temp = root->right;
+                delete root;
+                return temp;
+            }
+            //case 2 : node has no right child
+            //replace node with its left child
+            else if(root->right == nullptr){
+                TreeNode* temp = root->left;
+                delete root;
+                return temp;
+            }
+            //case 3 : node has 2 childs
+            //find inorder successor 
+            TreeNode* temp = minEle(root->right);
+
+            root->val = temp->val;
+
+
+            root->right = deleteNode(root->right,temp->val);
+        }
+        return root;
+    }
+};*/
+
+/*
+https://www.geeksforgeeks.org/problems/flatten-bst-to-sorted-list--111950/1
+class Solution {
+  public:
+    void inorder(Node* root,Node* &ans){
+        if(!root) return;
+        inorder(root->left,ans);
+        Node* n = new Node(root->data);
+        ans->right = n;
+        ans = ans->right;
+        inorder(root->right,ans);
+    }
+    Node *flattenBST(Node *root) {
+        // code here
+        if(!root) return root;
+        Node* dumm = new Node(0);
+        Node* ans = dumm;
+        
+        inorder(root,ans);
+        
+        return dumm->right;
+    }
+};
+*/
+
 
 /*
 https://leetcode.com/problems/validate-binary-search-tree/
