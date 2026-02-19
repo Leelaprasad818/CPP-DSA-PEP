@@ -14,6 +14,47 @@ A binary search tree is a special type of tree where
 
 
 /*
+https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/
+class Solution {
+public:
+    vector<vector<int>> verticalTraversal(TreeNode* root) {
+        vector<vector<int>> res;
+        if(!root) return res;
+
+        map<int,map<int,multiset<int>>> m;
+
+        queue<pair<TreeNode* ,pair<int,int> > > q;
+
+        q.push({root,{0,0}});
+
+        while(!q.empty()){
+
+            auto front = q.front();
+            TreeNode* node = front.first;
+            int pos1 = front.second.first;
+            int pos2 = front.second.second;
+            q.pop();
+
+            m[pos1][pos2].insert(node->val);
+
+            if(node->left) q.push({node->left,{pos1-1,pos2+1}});
+            if(node->right) q.push({node->right,{pos1+1,pos2+1}});
+        }
+
+        for(auto &p : m){
+            vector<int> column;
+            for(auto &q : p.second){
+                column.insert(column.end(), q.second.begin(), q.second.end());
+            }
+            res.push_back(column);
+        }
+        return res;
+    }
+};
+*/
+
+
+/*
 https://leetcode.com/problems/delete-node-in-a-bst/
  //step1 : find the node to be deleted by comparisions 
  //step2:restructive its children while preserving BST order
