@@ -13,7 +13,31 @@ internally
 
 */
 
-
+/*
+vector<vector<int>> diagonalWaveCollector(vector<vector<int>> &grid) {
+    
+    int m = grid.size();
+    int n = grid[0].size();
+    
+    vector<vector<int>> result;
+    
+    for(int sum = 0; sum <= m + n - 2; sum++){
+        vector<int> diagonal;
+        
+        for(int i = 0; i < m; i++){
+            int j = sum - i;
+            
+            if(j >= 0 && j < n){
+                diagonal.push_back(grid[i][j]);
+            }
+        }
+        
+        result.push_back(diagonal);
+    }
+    
+    return result;
+}
+*/
 
 /*
 https://www.geeksforgeeks.org/problems/k-largest-elements4206/1
