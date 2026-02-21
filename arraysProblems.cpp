@@ -14,6 +14,49 @@ class Solution {
 };
 
 
+/*
+
+int matrixBorderSumCalculator(vector<vector<int>> &grid) {
+    
+    int m = grid.size();
+    int n = grid[0].size();
+    
+    int sum = 0;
+    
+    // If only one row
+    if(m == 1){
+        for(int j = 0; j < n; j++)
+            sum += grid[0][j];
+        return sum;
+    }
+    
+    // If only one column
+    if(n == 1){
+        for(int i = 0; i < m; i++)
+            sum += grid[i][0];
+        return sum;
+    }
+    
+    // First row
+    for(int j = 0; j < n; j++)
+        sum += grid[0][j];
+    
+    // Last row
+    for(int j = 0; j < n; j++)
+        sum += grid[m-1][j];
+    
+    // First column (excluding corners)
+    for(int i = 1; i < m-1; i++)
+        sum += grid[i][0];
+    
+    // Last column (excluding corners)
+    for(int i = 1; i < m-1; i++)
+        sum += grid[i][n-1];
+    
+    return sum;
+}
+*/
+
 https://www.geeksforgeeks.org/problems/check-if-an-array-is-sorted0701/1
 class Solution {
   public:
