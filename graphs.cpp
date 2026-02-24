@@ -1,7 +1,94 @@
+/*
+graph G = (V,E) consist of :
+        V -> set of vertices (individual object in graph)
+        E -> set of edges connecting pairs of vertices
+
+
+        -directed graph : edges have direction
+        -undirected : edges have no direction
+        -weighted : edges have values (weight /cost /distance)
+        -unweighted : no values for edges
+
+        path : a sequence of vertices connected edges
+
+        -cycle : a path that start and end at the same vertex
+
+        Degree-> in undirected graphs -> number of edges connected to a vertex in directed graphs
+            inDegree : incomming edges
+            outDegree: outgoing edges
+
+*/
+
+
+/*
+https://www.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1
+class Solution {
+  public:
+    bool bfs(int start,vector<vector<int>> &adj,vector<bool> &visited){
+        queue<int> q;
+        unordered_map<int,int> parent;
+        
+        visited[start] = true;
+        q.push(start);
+        
+        parent[start] = -1;
+        
+        while(!q.empty()){
+            int n = q.front();
+            q.pop();
+            for(int i : adj[n]){
+                if(!visited[i]){
+                    visited[i] = true;
+                    q.push(i);
+                    parent[i] = n;
+                }
+                else if(parent[n] != i) return true;
+            }
+        }
+        
+        return false;
+    }
+    bool dfs(int n,vector<vector<int>> &adj,vector<bool> &visited,unordered_map<int,int> &parent){
+        visited[node] = true;
+        for(int i : adj[n]){
+            if(!visited[i]){
+                parent[i] = n;
+                if(dfs(i,adj,visited,parent)) return true;
+            }else if(parent[n] != i) return true;
+        }
+        return false
+    }
+    
+    bool isCycle(int V, vector<vector<int>>& edges) {
+        // Code here
+        vector<vector<int>> adj(V);
+        for(auto &i : edges){
+            int u = i[0];
+            int v = i[1];
+            
+            adj[u].push_back(v);
+            adj[v].push_back(u);
+        }
+        vector<bool> visited(V,false);
+        
+        for(int i=0;i<V;i++){
+            if(!visited[i]){
+                if(bfs(i,adj,visited)){
+                    return true;
+                }
+            }
+        }
+        return false;
+        
+    }
+};
+*/
+
 //Undirected GraphRepresentation - AdjacencyMatrix
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
+/*
 class solution{
 public:
     void adjmatrix(){
@@ -283,4 +370,53 @@ class solution{
 };
 
 
+
+*/
+
+
+
+
+int main(){
+    int n;
+    int m;
+
+    cout<<"ENTER the number of vertices : ";
+    cin>>n;
+
+    cout<<"ENTER the number of edges : ";
+    cin>>m;
+
+
+    unordered_map<int,vector<int>> adjList;
+
+    for(int i=0;i<m;i++){
+        int u,v;
+        cin>>u>>v;
+        adjList[u].push_back(v);
+        adjList[v].push_back(u);
+    }
+    cout<<"adjacency List : "<<endl;
+    for(auto i : adjList){
+        cout<<endl;
+        for(int j : i.second){
+            cout<<j<<" ";
+        }
+
+    }/*
+    unordered_map<int,vector<pair<int,int>>> adjListWeighted;
+    for(int i=0;i<m;i++){
+        int u,v,weight;
+        cin>>u>>v>>weight;
+        adjList[u].push_back({v,weight});
+    }
+
+    for(auto i : adjListWeighted){
+        cout<<i.first<<" : "<< endl;
+        for(int j : i.second){
+            cout<<j.first << " " <<j.second;
+        }
+    }*/
+    
+
+}
 
