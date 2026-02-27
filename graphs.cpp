@@ -19,6 +19,74 @@ graph G = (V,E) consist of :
 
 */
 
+
+/*
+
+https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph/1
+// User function Template for C++
+class Solution {
+  public:
+    void dfs(int curr,vector<vector<pair<int,int>>> adj,vector<int> &visited,stack<int> &st){
+        visited[curr] = 1;
+        
+        for(auto &i : adj[curr]){
+            int n = i.first;
+            if(!visited[n]){
+                dfs(n,adj,visited,st);
+            }
+        }
+        st.push(curr);
+    }
+    
+    vector<int> shortestPath(int V, int E, vector<vector<int>>& edges) {
+        // code here
+        vector<vector<pair<int,int>>> adj(V);
+        
+        for(int i = 0 ; i < m ; i++){
+            int u = edges[i][0];
+            int v = edges[i][1];
+            int w = edges[i][2];
+            adj[u].push_back({v,w});
+        }
+        
+        vector<int> visited(n,0);
+        stack<int> st;
+        
+        for(int i=0;i<n;i++){
+            if(!visited[i]){
+                dfs(i,adj,visited,st);
+            }
+        }
+        
+        vector<int> dist(n,INT_MAX);
+        dist[0] = 0;
+        
+        while(!st.empty()){
+            int n = st.top();
+            st.pop();
+            
+            for(auto &edge:adj[node]){
+                int i = edge.first;
+                int w = edge.second;
+                
+                if(dist[n] + w < dist[i]){
+                    dist[i] = dist[n] + w;
+                }
+            }
+        }
+        
+        for(int i=0;i<n;i++){
+            if(dist[i] == INT_MAX){
+                dist[i] = -1;
+            }
+        }
+        return dist;
+    }
+};
+
+*/
+
+
 /*
 https://www.geeksforgeeks.org/problems/prerequisite-tasks/1
 class Solution {
