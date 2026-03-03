@@ -21,6 +21,74 @@ graph G = (V,E) consist of :
 
 
 
+/*
+The Quest for the Magic Keys
+A brave explorer is standing at the entrance of a
+mysterious temple. This temple contains n chambers,
+numbered from 0 to n-1. At the start, only chamber 0
+is open. All other chambers are locked. To enter a
+locked chamber, you must possess its specific
+key.Inside each chamber, there is a chest containing
+keys to other chambers. Once you enter a chamber,
+you can collect all the keys found there and use them
+to open more doors. You can visit the chambers in any
+order as long as you have the required keys. Your task
+is to determine if the explorer can successfully enter
+every single chamber in the temple. Return true if all
+chambers can be visited, and false otherwise.
+Example 1
+Input:
+rooms = [[1], [2], [3], []]
+Output:
+true
+Explaination:
+The explorer starts in chamber 0 and finds the key to
+chamber 1. Using that key, they enter chamber 1 and
+find the key to chamber 2. Then, they enter chamber 2
+to find the key to chamber 3. Finally, they enter
+chamber 3. All chambers are visited.
+Example 2
+Input:
+rooms = [[1, 3], [3, 0, 1], [2],
+[0]]
+Output:
+false
+Explaination:
+The explorer can enter chambers 0, 1, and 3. However,
+the only key to chamber 2 is located inside chamber 2
+itself. Since the door is locked from the outside, the
+explorer can never enter chamber 2.
+Input Format:
+An array of arrays rooms, where rooms[i] contains a
+list of integers.
+Each integer in rooms[i] represents a key to another
+chamber.
+n is the number of chambers.
+
+
+void dfs(int i,vector<vector<int>> &rooms ,vector<int> &visited){
+    visited[i] = 1;
+    for(int k : rooms[i]){
+        if(!visited[k]){
+            dfs(k,rooms,visited);
+        }
+    }
+}
+
+
+bool canVisitAllRooms(vector<vector<int>>& rooms) {
+   int n = rooms.size();
+   vector<int> visited(n,0);
+
+   dfs(0,rooms,visited);
+   for(int i=0;i<n;i++){
+    if(!visited[i]){
+        return false;
+    }
+   }
+   return true;;
+}
+*/
 
 /*
 
