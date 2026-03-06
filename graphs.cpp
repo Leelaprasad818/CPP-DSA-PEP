@@ -91,6 +91,70 @@ bool canVisitAllRooms(vector<vector<int>>& rooms) {
 */
 
 /*
+https://leetcode.com/problems/number-of-enclaves/
+class Solution {
+public:
+    void dfs(int i,int j,vector<vector<int>> &visited,vector<vector<int>> &grid){
+        int m = grid.size();
+        int n = grid[0].size();
+        visited[i][j] = 1;
+        
+        if(i + 1 < m && !visited[i+1][j] && grid[i+1][j]) {
+            dfs(i+1,j,visited,grid);
+        }
+        if(i - 1 >= 0 && !visited[i-1][j] && grid[i-1][j]) {
+            dfs(i-1,j,visited,grid);
+        }
+        if(j + 1 < n && !visited[i][j+1] && grid[i][j+1]) {
+            dfs(i,j+1,visited,grid);
+        }
+        if(j - 1 >= 0 && !visited[i][j-1] && grid[i][j-1]) {
+            dfs(i,j-1,visited,grid);
+        }
+        
+    }
+    int numEnclaves(vector<vector<int>>& grid) {
+        //Write your code here...
+        int count = 0;
+        
+        int m = grid.size();
+        int n = grid[0].size();
+        vector<vector<int>> visited(m,vector<int>(n,0));
+        
+        for(int i=0;i<n;i++){
+            if(grid[0][i] && !visited[0][i]){
+                dfs(0,i,visited,grid);
+            }
+            if(grid[m-1][i] && !visited[m-1][i]){
+                dfs(m-1,i,visited,grid);
+            }
+        }
+        for(int i=0;i<m;i++){
+            if(grid[i][0] && !visited[i][0]){
+                dfs(i,0,visited,grid);
+            }
+            if(grid[i][n-1] && !visited[i][n-1]){
+                dfs(i,n-1,visited,grid);
+            }
+        }
+        
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(!visited[i][j] && grid[i][j]){
+                    count++;
+                }
+            }
+        }
+        
+        return count;
+    }
+};
+*/
+
+
+
+
+/*
 
 #include<bits/stdc++.h>
 using namespace std;
